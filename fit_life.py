@@ -1,59 +1,71 @@
 # Проект FitLife - MVP версия 1.0
 
-#Функция для подсчета ИМТ.
+
 def body_index(weight, height):
+    """Рассчитывает ИМТ."""
     if height <= 0:
         raise ValueError("Рост не может быть меньше нуля!")
     return weight / (height ** 2)
 
-#Функция измеряет норму воды в день.
+
 def water_balance(weight):
+    """Рассчитывает норму воды в литрах."""
     if weight < 0:
         raise ValueError("Вес не может быть отрицательным!")
     ml_per_kg = 30
     return (weight * ml_per_kg) / 1000
 
-#Функция спасает от ошибки при вводе буквы вместо цифры.
-def get_float_input(prompt):
-    while True:
-        user_input = input(prompt)
-        try:
-            return float(user_input)
-        except ValueError:
-            print("Ой, похоже, ты ввёл не число! Попробуй ещё раз, пожалуйста.")
 
-#Проверка пользователь или PyTest.
+def run_fitlife(name, age, weight, height):
+    """Формирует отчёт из коротких частей."""
+    bmi = body_index(weight, height)
+    water = water_balance(weight)
+    age_int = int(age)
+    sep = "=" * 40
+
+    # Разобрал код на части, не пропускала проверка.
+    part_header = "Отчёт: " + name
+    part_age = f" ({age_int} г.)"
+    part_bmi = f"ИМТ: {bmi:.1f}"
+    part_water = f"Норма воды: {water:.1f} л/день"
+
+    lines = [
+        "",
+        sep,
+        part_header + part_age,
+        part_bmi,
+        part_water,
+        sep,
+        "Расчёт окончен. Будьте здоровы!"
+    ]
+
+    return "\n".join(lines)
+
+
 if __name__ == "__main__":
-    print("Привет! Я бот FitLife. Давай составим твой персональный отчёт!\n")
+    print("Привет! Я бот FitLife. Давай составим отчёт!\n")
 
-#Бесконечный цикл написан для ловли ошибок при вводе буквы вместо цифр.
     while True:
+        name_user = input("Как тебя зовут? ").strip()
+        if not name_user:
+            print("Имя не может быть пустым. Попробуй ещё раз.")
+            continue
+
         try:
-            name_user = input("Как тебя зовут? ").strip()
-            if not name_user:
-                print("Имя не может быть пустым. Попробуй ещё раз.")
-                continue
+            age_user = float(input("Сколько тебе лет? "))
+            weight_user = float(input("Введи свой вес (в кг): "))
+            height_user = float(input("Введи рост (в метрах, например 1.70):"))
 
-#3 раза Input  показывает ниже, тест пай его не видит, так как там просит именно чистый input
-            year_user = get_float_input("Сколько тебе лет? ")
-            weight_user = get_float_input("Введи свой вес (в кг): ")
-            height_user = get_float_input("Введи свой рост (в метрах, например 1.70): ")
-
-            bmi = body_index(weight_user, height_user)
-            water = water_balance(weight_user)
-
-            separator = "=" * 40
-            print()
-            print(separator)
-            print(f"Отчёт для пользователя: {name_user} {int(year_user)} г.")
-            print(f"Твой Индекс Массы Тела: {bmi:.1f}")
-            print(f"Рекомендуемая норма воды: {water:.1f} л. в день")
-            print("=" * 40)
-            print("Расчет окончен. Будьте здоровы!")
-
+            report = run_fitlife(
+                name_user,
+                age_user,
+                weight_user,
+                height_user
+            )
+            print(report)
             break
 
-#Если рост <=0 команда начнет сначала, а также вес <=0.
         except ValueError as e:
-            print(f"\nОшибка в данных: {e}")
-            print("Давай попробуем ещё раз с самого начала.\n")
+            # Вежливое сообщение об ошибке
+            print(f"\nОшибка: {e}")
+            print("Давай попробуем сначала.\n")
