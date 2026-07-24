@@ -1,19 +1,27 @@
 # Проект FitLife - MVP версия 1.0
 
+# КОНСТАНТЫ.
+WATER_ML_PER_KG = 30
+ML_PER_LITER = 1000
+MIN_AGE = 1
+MAX_AGE = 120
+MIN_WEIGHT = 30
+MAX_WEIGHT = 120
+MIN_HEIGHT = 1.4
+MAX_HEIGHT = 2.2
+SEPARATOR = "=" * 40
+
 
 def body_index(weight, height):
     """Рассчитывает ИМТ."""
-    if height <= 0:
-        raise ValueError("Рост не может быть меньше нуля!")
+    if height == 0:
+        raise ZeroDivisionError("Рост не может быть равен нулю!")
     return weight / (height ** 2)
 
 
 def water_balance(weight):
     """Рассчитывает норму воды в литрах."""
-    if weight < 0:
-        raise ValueError("Вес не может быть отрицательным!")
-    ml_per_kg = 30
-    return (weight * ml_per_kg) / 1000
+    return (weight * WATER_ML_PER_KG) / ML_PER_LITER
 
 
 def run_fitlife(name, age, weight, height):
@@ -21,51 +29,89 @@ def run_fitlife(name, age, weight, height):
     bmi = body_index(weight, height)
     water = water_balance(weight)
     age_int = int(age)
-    sep = "=" * 40
-
-    # Разобрал код на части, не пропускала проверка.
-    part_header = "Отчёт: " + name
+    part_header = f"Отчёт: {name}"
     part_age = f" ({age_int} г.)"
     part_bmi = f"ИМТ: {bmi:.1f}"
     part_water = f"Норма воды: {water:.1f} л/день"
 
-    lines = [
+    lines = (
         "",
-        sep,
+        SEPARATOR,
         part_header + part_age,
         part_bmi,
         part_water,
-        sep,
+        SEPARATOR,
         "Расчёт окончен. Будьте здоровы!"
-    ]
+    )
 
     return "\n".join(lines)
+
+
+def get_name():
+    """Запрашивает имя, пока оно не будет введено."""
+    while True:
+        name = input("Как тебя зовут? ").strip()
+        if not name:
+            print("Имя не может быть пустым. Попробуй ещё раз.\n")
+            continue
+        return name
+
+
+def get_age():
+    """Запрашивает возраст с валидацией диапазона."""
+    while True:
+        try:
+            val = float(input("Сколько тебе лет? "))
+            if not (MIN_AGE <= val <= MAX_AGE):
+                print(
+                    f"Возраст должен быть от {MIN_AGE} "
+                    f"до {MAX_AGE} лет. Попробуй ещё раз."
+                )
+                continue
+            return val
+        except ValueError:
+            print("Ошибка: нужно ввести число! Попробуй ещё раз.")
+
+
+def get_weight():
+    """Запрашивает вес с валидацией диапазона."""
+    while True:
+        try:
+            val = float(input("Введи свой вес (в кг): "))
+            if not (MIN_WEIGHT <= val <= MAX_WEIGHT):
+                print(
+                    f"Вес должен быть от {MIN_WEIGHT} "
+                    f"до {MAX_WEIGHT} кг. Попробуй ещё раз."
+                )
+                continue
+            return val
+        except ValueError:
+            print("Ошибка: нужно ввести число! Попробуй ещё раз.")
+
+
+def get_height():
+    """Запрашивает рост с валидацией диапазона."""
+    while True:
+        try:
+            val = float(input("Введи рост (в метрах, например 1.70): "))
+            if not (MIN_HEIGHT <= val <= MAX_HEIGHT):
+                print(
+                    f"Рост должен быть от {MIN_HEIGHT} "
+                    f"до {MAX_HEIGHT} м. Попробуй ещё раз."
+                )
+                continue
+            return val
+        except ValueError:
+            print("Ошибка: нужно ввести число! Попробуй ещё раз.")
 
 
 if __name__ == "__main__":
     print("Привет! Я бот FitLife. Давай составим отчёт!\n")
 
-    while True:
-        name_user = input("Как тебя зовут? ").strip()
-        if not name_user:
-            print("Имя не может быть пустым. Попробуй ещё раз.")
-            continue
+    name_user = get_name()
+    age_raw = get_age()
+    weight_raw = get_weight()
+    height_raw = get_height()
 
-        try:
-            age_user = float(input("Сколько тебе лет? "))
-            weight_user = float(input("Введи свой вес (в кг): "))
-            height_user = float(input("Введи рост (в метрах, например 1.70):"))
-
-            report = run_fitlife(
-                name_user,
-                age_user,
-                weight_user,
-                height_user
-            )
-            print(report)
-            break
-
-        except ValueError as e:
-            # Вежливое сообщение об ошибке
-            print(f"\nОшибка: {e}")
-            print("Давай попробуем сначала.\n")
+    report = run_fitlife(name_user, age_raw, weight_raw, height_raw)
+    print("\n" + report)
