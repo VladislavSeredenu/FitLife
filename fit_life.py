@@ -41,7 +41,7 @@ def run_fitlife(name, age, weight, height):
         part_bmi,
         part_water,
         SEPARATOR,
-        "Расчёт окончен. Будьте здоровы!"
+        "Расчёт окончен. Будьте здоровы!",
     )
 
     return "\n".join(lines)
@@ -61,14 +61,14 @@ def get_age():
     """Запрашивает возраст с валидацией диапазона."""
     while True:
         try:
-            val = float(input("Сколько тебе лет? "))
+            year_value = float(input("Сколько тебе лет? "))
             if not (MIN_AGE <= val <= MAX_AGE):
                 print(
                     f"Возраст должен быть от {MIN_AGE} "
                     f"до {MAX_AGE} лет. Попробуй ещё раз."
                 )
                 continue
-            return val
+            return year_value
         except ValueError:
             print("Ошибка: нужно ввести число! Попробуй ещё раз.")
 
@@ -77,14 +77,14 @@ def get_weight():
     """Запрашивает вес с валидацией диапазона."""
     while True:
         try:
-            val = float(input("Введи свой вес (в кг): "))
+            weight_value = float(input("Введи свой вес (в кг): "))
             if not (MIN_WEIGHT <= val <= MAX_WEIGHT):
                 print(
                     f"Вес должен быть от {MIN_WEIGHT} "
                     f"до {MAX_WEIGHT} кг. Попробуй ещё раз."
                 )
                 continue
-            return val
+            return weight_value
         except ValueError:
             print("Ошибка: нужно ввести число! Попробуй ещё раз.")
 
@@ -93,14 +93,14 @@ def get_height():
     """Запрашивает рост с валидацией диапазона."""
     while True:
         try:
-            val = float(input("Введи рост (в метрах, например 1.70): "))
+            height_value = float(input("Введи рост (в метрах, например 1.70): "))
             if not (MIN_HEIGHT <= val <= MAX_HEIGHT):
                 print(
                     f"Рост должен быть от {MIN_HEIGHT} "
                     f"до {MAX_HEIGHT} м. Попробуй ещё раз."
                 )
                 continue
-            return val
+            return height_value
         except ValueError:
             print("Ошибка: нужно ввести число! Попробуй ещё раз.")
 
