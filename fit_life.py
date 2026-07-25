@@ -91,11 +91,10 @@ if __name__ == "__main__":
     bmi_val = body_index(weight_raw, height_raw)
     water_val = water_balance(weight_raw)
 
-    print(
-        f"\n{SEPARATOR}\n"
-        f"Отчёт: {name_user} ({int(age_raw)} г.)\n"
-        f"ИМТ: {bmi_val:.1f}\n"
-        f"Норма воды: {water_val:.1f} л/день\n"
-        f"{SEPARATOR}\n"
-        "Расчёт окончен. Будьте здоровы!"
-    )
+    print(SEPARATOR)
+    print(f"Отчёт: {name_user} ({int(age_raw)} г.)")
+    print(f"ИМТ: {bmi_val:.1f}")
+    print(f"Норма воды: {water_val:.1f} л/день")
+    print(SEPARATOR)
+    print("Расчёт окончен. Будьте здоровы!")
+    
