@@ -65,7 +65,7 @@ def get_age():
             if not (MIN_AGE <= year_value <= MAX_AGE):
                 print(
                     f"Возраст должен быть от {MIN_AGE} "
-                    f"до {MAX_AGE} лет. Попробуй ещё раз."
+                    f"до {MAX_AGE} лет."
                 )
                 continue
             return year_value
@@ -81,7 +81,7 @@ def get_weight():
             if not (MIN_WEIGHT <= weight_value <= MAX_WEIGHT):
                 print(
                     f"Вес должен быть от {MIN_WEIGHT} "
-                    f"до {MAX_WEIGHT} кг. Попробуй ещё раз."
+                    f"до {MAX_WEIGHT} кг."
                 )
                 continue
             return weight_value
@@ -97,7 +97,7 @@ def get_height():
             if not (MIN_HEIGHT <= height_value <= MAX_HEIGHT):
                 print(
                     f"Рост должен быть от {MIN_HEIGHT} "
-                    f"до {MAX_HEIGHT} м. Попробуй ещё раз."
+                    f"до {MAX_HEIGHT} м."
                 )
                 continue
             return height_value
