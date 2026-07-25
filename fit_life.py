@@ -62,7 +62,7 @@ def get_age():
     while True:
         try:
             year_value = float(input("Сколько тебе лет? "))
-            if not (MIN_AGE <= val <= MAX_AGE):
+            if not (MIN_AGE <= year_value <= MAX_AGE):
                 print(
                     f"Возраст должен быть от {MIN_AGE} "
                     f"до {MAX_AGE} лет. Попробуй ещё раз."
@@ -78,7 +78,7 @@ def get_weight():
     while True:
         try:
             weight_value = float(input("Введи свой вес (в кг): "))
-            if not (MIN_WEIGHT <= val <= MAX_WEIGHT):
+            if not (MIN_WEIGHT <= weight_value <= MAX_WEIGHT):
                 print(
                     f"Вес должен быть от {MIN_WEIGHT} "
                     f"до {MAX_WEIGHT} кг. Попробуй ещё раз."
@@ -94,7 +94,7 @@ def get_height():
     while True:
         try:
             height_value = float(input("Введи рост (в метрах, например 1.70): "))
-            if not (MIN_HEIGHT <= val <= MAX_HEIGHT):
+            if not (MIN_HEIGHT <= height_value <= MAX_HEIGHT):
                 print(
                     f"Рост должен быть от {MIN_HEIGHT} "
                     f"до {MAX_HEIGHT} м. Попробуй ещё раз."
