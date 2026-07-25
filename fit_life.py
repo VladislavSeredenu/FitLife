@@ -31,29 +31,6 @@ def water_balance(weight):
     return (weight * WATER_ML_PER_KG) / ML_PER_LITER
 
 
-def run_fitlife(name, age, weight, height):
-    """Формирует отчёт из коротких частей."""
-    bmi = body_index(weight, height)
-    water = water_balance(weight)
-    age_int = int(age)
-    part_header = f"Отчёт: {name}"
-    part_age = f" ({age_int} г.)"
-    part_bmi = f"ИМТ: {bmi:.1f}"
-    part_water = f"Норма воды: {water:.1f} л/день"
-
-    lines = (
-        "",
-        SEPARATOR,
-        part_header + part_age,
-        part_bmi,
-        part_water,
-        SEPARATOR,
-        "Расчёт окончен. Будьте здоровы!",
-    )
-
-    return "\n".join(lines)
-
-
 def get_name():
     """Запрашивает имя, пока оно не будет введено."""
     while True:
@@ -111,5 +88,14 @@ if __name__ == "__main__":
     weight_raw = get_weight()
     height_raw = get_height()
 
-    report = run_fitlife(name_user, age_raw, weight_raw, height_raw)
-    print("\n" + report)
+    bmi_val = body_index(weight_raw, height_raw)
+    water_val = water_balance(weight_raw)
+
+    print(
+        f"\n{SEPARATOR}\n"
+        f"Отчёт: {name_user} ({int(age_raw)} г.)\n"
+        f"ИМТ: {bmi_val:.1f}\n"
+        f"Норма воды: {water_val:.1f} л/день\n"
+        f"{SEPARATOR}\n"
+        "Расчёт окончен. Будьте здоровы!"
+    )
