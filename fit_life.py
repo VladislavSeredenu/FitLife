@@ -1,6 +1,6 @@
 # Проект FitLife - MVP версия 1.0
 
-# КОНСТАНТЫ.
+# Константы.
 WATER_ML_PER_KG = 30
 ML_PER_LITER = 1000
 MIN_AGE = 1
@@ -10,6 +10,13 @@ MAX_WEIGHT = 120
 MIN_HEIGHT = 1.4
 MAX_HEIGHT = 2.2
 SEPARATOR = "=" * 40
+
+# Константы для сообщений при выводе.
+MSG_AGE_RANGE = f"Возраст должен быть от {MIN_AGE} до {MAX_AGE} лет."
+MSG_WEIGHT_RANGE = f"Вес должен быть от {MIN_WEIGHT} до {MAX_WEIGHT} кг."
+MSG_HEIGHT_RANGE = f"Рост должен быть от {MIN_HEIGHT} до {MAX_HEIGHT} м."
+MSG_INVALID_NUMBER = "Ошибка: нужно ввести число! Попробуй ещё раз."
+MSG_EMPTY_NAME = "Имя не может быть пустым. Попробуй ещё раз.\n"
 
 
 def body_index(weight, height):
@@ -52,7 +59,7 @@ def get_name():
     while True:
         name = input("Как тебя зовут? ").strip()
         if not name:
-            print("Имя не может быть пустым. Попробуй ещё раз.\n")
+            print(MSG_EMPTY_NAME)
             continue
         return name
 
@@ -63,14 +70,11 @@ def get_age():
         try:
             year_value = float(input("Сколько тебе лет? "))
             if not (MIN_AGE <= year_value <= MAX_AGE):
-                print(
-                    f"Возраст должен быть от {MIN_AGE} "
-                    f"до {MAX_AGE} лет."
-                )
+                print(MSG_AGE_RANGE)
                 continue
             return year_value
         except ValueError:
-            print("Ошибка: нужно ввести число! Попробуй ещё раз.")
+            print(MSG_INVALID_NUMBER)
 
 
 def get_weight():
@@ -79,30 +83,24 @@ def get_weight():
         try:
             weight_value = float(input("Введи свой вес (в кг): "))
             if not (MIN_WEIGHT <= weight_value <= MAX_WEIGHT):
-                print(
-                    f"Вес должен быть от {MIN_WEIGHT} "
-                    f"до {MAX_WEIGHT} кг."
-                )
+                print(MSG_WEIGHT_RANGE)
                 continue
             return weight_value
         except ValueError:
-            print("Ошибка: нужно ввести число! Попробуй ещё раз.")
+            print(MSG_INVALID_NUMBER)
 
 
 def get_height():
     """Запрашивает рост с валидацией диапазона."""
     while True:
         try:
-            height_value = float(input("Введи рост (в метрах, например 1.70): "))
+            height_value = float(input("Введи рост (метры, например 1.70):"))
             if not (MIN_HEIGHT <= height_value <= MAX_HEIGHT):
-                print(
-                    f"Рост должен быть от {MIN_HEIGHT} "
-                    f"до {MAX_HEIGHT} м."
-                )
+                print(MSG_HEIGHT_RANGE)
                 continue
             return height_value
         except ValueError:
-            print("Ошибка: нужно ввести число! Попробуй ещё раз.")
+            print(MSG_INVALID_NUMBER)
 
 
 if __name__ == "__main__":
