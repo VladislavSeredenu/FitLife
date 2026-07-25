@@ -88,11 +88,12 @@ if __name__ == "__main__":
     weight_raw = get_weight()
     height_raw = get_height()
 
+    age_int = int(age_raw)
     bmi_val = body_index(weight_raw, height_raw)
     water_val = water_balance(weight_raw)
 
     print(SEPARATOR)
-    print(f"Отчёт: {name_user} ({int(age_raw)} г.)")
+    print(f"Отчёт: {name_user} ({age_int} г.)")
     print(f"ИМТ: {bmi_val:.1f}")
     print(f"Норма воды: {water_val:.1f} л/день")
     print(SEPARATOR)
