@@ -97,4 +97,3 @@ if __name__ == "__main__":
     print(f"Норма воды: {water_val:.1f} л/день")
     print(SEPARATOR)
     print("Расчёт окончен. Будьте здоровы!")
-    
